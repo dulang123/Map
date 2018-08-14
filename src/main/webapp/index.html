@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+
+        var maq=maq || [];
+        maq.push(['setaccount','AllenWoon']);
+        $(function () {
+            $("a").click(function () {
+                var clstag=$(this).attr("clstag");
+                var  value=$(this).text();
+                alert(clstag);
+                maq.push(['value',value]);
+                clstag =clstag.split('|');
+                for (i in clstag){
+                    maq.push(['type'+i,clstag[i]]);
+                }
+                sendRequest();
+            })
+
+        });
+
+        function sendRequest(){
+            var ma=document.createElement('script');
+            ma.type='text/javascript';
+            ma.async=true;
+            ma.src='http://192.168.8.130/ma.js';
+            var  s=document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ma,s);
+
+        }
+    </script>
+</head>
+<body>
+Test
+<a href="http://192.168.8.130/page1.html" target="_blank" clstag="click|index|page1">page1</a><br>
+<a href="http://192.168.8.130/page2.html" target="_blank" clstag="click|index|page2">page1</a><br>
+</body>
+</html>
